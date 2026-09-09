@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><style>
+@font-face {
+  font-family: "Optimistic";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("/fonts/OptimisticAI_VF_Optimized.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Optimistic Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/OptimisticMono_W_TextRegular.woff2") format("woff2");
+}
+:where(html) {
+  font-family: "Optimistic", system-ui, sans-serif;
+}
+:where(code, pre, kbd, samp) {
+  font-family: "Optimistic Mono", ui-monospace, monospace;
+}
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MovieHub Pro - Admin Ready</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
+body{background:#0a0a0a;color:#fff}
+::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-thumb{background:#333;border-radius:10px}
+.header{position:sticky;top:0;z-index:50;background:rgba(10,10,10,0.95);backdrop-filter:blur(10px);border-bottom:1px solid #222;padding:10px 15px;display:flex;align-items:center;gap:12px}
+.logo{color:#e50914;font-weight:900;font-size:20px;letter-spacing:-0.5px;cursor:pointer}
+.logo span{color:#fff}
+.search{flex:1;max-width:500px;margin-left:20px;position:relative}
+.search input{width:100%;background:#1a1a1a;border:1px solid #2a2a2a;border-radius:999px;padding:9px 15px 9px 35px;color:#fff;outline:none}
+.search input:focus{border-color:#e50914}
+.shield{width:36px;height:36px;border-radius:50%;background:#1a1a1a;border:1px solid #2a2a2a;display:grid;place-items:center;cursor:pointer}
+.shield:hover{border-color:#e50914}
+.hero{height:62vh;position:relative;overflow:hidden;background:#000}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.7}
+.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,0.9),transparent),linear-gradient(to top,#0a0a0a,transparent)}
+.hero-content{position:relative;z-index:2;height:100%;max-width:1400px;margin:auto;padding:0 15px;display:flex;align-items:flex-end;padding-bottom:40px;gap:15px}
+.hero-poster{width:88px;aspect-ratio:2/3;object-fit:cover;border-radius:12px;border:1px solid rgba(255,255,255,0.2);display:none}
+@media(min-width:768px){.hero-poster{display:block}.hero{height:70vh}}
+.badge{background:#e50914;color:#fff;font-size:11px;font-weight:800;padding:4px 10px;border-radius:999px;display:inline-flex;gap:5px;align-items:center;margin-bottom:10px}
+.hero h1{font-size:28px;font-weight:900;line-height:0.95;text-shadow:0 4px 20px #000}
+@media(min-width:768px){.hero h1{font-size:48px}}
+.meta{font-size:13px;color:#ccc;margin-top:10px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.btn{height:42px;padding:0 24px;border-radius:999px;font-weight:700;font-size:14px;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.btn-red{background:#e50914;color:#fff}.btn-red:hover{background:#b80710}
+.btn-white{background:#fff;color:#000}.btn-dark{background:#1a1a1a;border:1px solid #2a2a2a;color:#ccc}
+.cat-bar{background:#0a0a0a;border-top:1px solid #1a1a1a;border-bottom:1px solid #1a1a1a;padding:8px 10px;display:flex;gap:8px;overflow-x:auto}
+.cat-bar button{white-space:nowrap;padding:7px 16px;border-radius:999px;font-size:13px;font-weight:600;border:1px solid #2a2a2a;background:#1a1a1a;color:#ccc;cursor:pointer}
+.cat-bar button.active{background:#fff;color:#000;border-color:#fff}
+.row{padding:20px 10px}
+.row h2{font-size:18px;font-weight:800;margin-bottom:12px;display:flex;align-items:center;gap:8px;border-left:4px solid #e50914;padding-left:10px}
+.grid{display:flex;gap:12px;overflow-x:auto;padding-bottom:10px}
+.card{flex-shrink:0;width:112px;cursor:pointer}
+@media(min-width:768px){.card{width:156px}}
+.card-img{aspect-ratio:2/3;border-radius:12px;overflow:hidden;border:1px solid #2a2a2a;position:relative;background:#1a1a1a}
+.card-img img{width:100%;height:100%;object-fit:cover}
+.card-img .new{position:absolute;top:6px;left:6px;background:#e50914;color:#fff;font-size:9px;font-weight:800;padding:2px 6px;border-radius:999px}
+.card-title{font-size:12px;font-weight:600;margin-top:6px;line-height:1.2;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card-sub{font-size:11px;color:#777}
+/* Detail */
+.detail{max-width:1000px;margin:auto}
+.detail-hero{position:relative;height:40vh;background:#000;overflow:hidden}
+.detail-hero img{width:100%;height:100%;object-fit:cover;opacity:0.7}
+.detail-info{padding:15px;background:#121212;border:1px solid #2a2a2a;border-radius:16px;margin:-30px 10px 10px;position:relative;z-index:3}
+.info-grid{display:grid;gap:8px;margin-top:15px}
+.info-row{display:flex;gap:10px;padding:10px;background:#0a0a0a;border-radius:10px;border:1px solid #1f1f1f;font-size:13px}
+.info-row span:first-child{width:80px;color:#666;flex-shrink:0}
+/* Admin */
+.admin-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(10px);z-index:100;display:grid;place-items:center;padding:15px}
+.admin-box{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:20px;padding:24px;width:100%;max-width:360px}
+.admin-main{position:fixed;inset:0;z-index:100;background:#0a0a0a;overflow:auto}
+.admin-header{position:sticky;top:0;background:#121212;border-bottom:1px solid #2a2a2a;height:56px;display:flex;align-items:center;padding:0 15px;gap:12px}
+.admin-sidebar{border-bottom:1px solid #1a1a1a;background:#121212;display:flex;gap:8px;padding:10px;overflow-x:auto}
+@media(min-width:768px){.admin-layout{display:flex}.admin-sidebar{width:220px;flex-direction:column;border-right:1px solid #1a1a1a;border-bottom:none;min-height:calc(100vh - 56px)}}
+.admin-tab{padding:8px 14px;border-radius:999px;font-size:13px;border:1px solid #2a2a2a;background:#1a1a1a;color:#ccc;cursor:pointer;white-space:nowrap}
+.admin-tab.active{background:#fff;color:#000;font-weight:700}
+.admin-content{flex:1;padding:15px}
+.stat{padding:15px;background:#1a1a1a;border:1px solid #2a2a2a;border-radius:16px}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+const MOVIES = [
+"Pushpa 2: The Rule","Kalki 2898 AD","Stree 2","Fighter","Animal","Jawan","Pathaan","Gadar 2","Dune: Part Two","Deadpool & Wolverine","Inside Out 2","Godzilla x Kong","Furiosa","Kingdom of Planet Apes","Oppenheimer","Salaar","Dunki","12th Fail","Laapataa Ladies","Article 370","Munjya","Chandu Champion","Kill","Maharaja","Manjummel Boys","Aavesham","Premalu","Shaitaan","Crew","Bade Miyan Chote Miyan"
+];
+const CATS = ["Bollywood","Hollywood","South","Dual Audio","Web Series","Netflix","300MB"];
+function makeMovie(i,isNew=false){
+ const title=MOVIES[i%MOVIES.length]+(i>=30?` ${Math.floor(i/10)+1}`:"");
+ const cat=CATS[i%CATS.length];
+ return {
+  id:'mv_'+Date.now()+'_'+i+'_'+Math.random().toString(36).slice(2,6),
+  title, cat, year:String(2024+i%3), rating:(7+Math.random()*2).toFixed(1),
+  quality:["480p","720p","1080p"][i%3]+" WEB-DL", size:`${400+i*37%900+300}MB`,
+  poster:`https://picsum.photos/seed/poster${i}/400/600`,
+  hero:`https://picsum.photos/seed/hero${i}/1280/720`,
+  plot:`${title} is a blockbuster ${2024+i%3} release. Full movie in HD quality. Watch or download now on MovieHub Pro.`,
+  trailer:["dQw4w9WgXcQ","9bZkp7q19f0","kJQP7kiw5Fk"][i%3],
+  downloads:[{q:"480p",s:"450MB"},{q:"720p",s:"1.1GB"},{q:"1080p",s:"2.4GB"}],
+  shots:Array.from({length:6},(_,j)=>`https://picsum.photos/seed/ss${i}-${j}/400/225`),
+  views:Math.floor(1000+Math.random()*20000), isNew
+ }
+}
+let movies = Array.from({length:30},(_,i)=>makeMovie(i,i<4));
+let search=""; let cat="Home"; let selected=null;
+let showAdmin=false; let adminAuth=false; let pin=""; let adminTab="Dashboard";
+let earnings=12.45; let downloads=3421; let clicks=892;
+
+function render(){
+ const root=document.getElementById('root');
+ const filtered=movies.filter(m=>m.title.toLowerCase().includes(search.toLowerCase()) && (cat==="Home"||m.cat===cat));
+ const feat=movies[0];
+ 
+ let html=`
+ <div class="header">
+  <div class="logo" onclick="goHome()">MOVIEHUB <span>PRO</span></div>
+  <div class="search"><input id="sInput" placeholder="Search movies..." value="${search}"><span style="position:absolute;left:10px;top:50%;transform:translateY(-50%)">🔍</span></div>
+  <div class="shield" onclick="openAdmin()" title="Admin">🛡️</div>
+ </div>
+ `;
+
+ if(!selected){
+  html+=`
+  <div class="hero">
+   <img src="${feat.hero}">
+   <div class="hero-content">
+    <img class="hero-poster" src="${feat.poster}">
+    <div>
+     <div class="badge">👑 #1 Trending • ${feat.cat}</div>
+     <h1>${feat.title}</h1>
+     <div class="meta">⭐ ${feat.rating} IMDb • ${feat.year} • ${feat.quality}</div>
+     <div style="margin-top:15px;display:flex;gap:10px">
+      <button class="btn btn-white" onclick="selectMovie('${feat.id}')">▶ Watch / Download</button>
+      <button class="btn btn-dark" onclick="window.open('https://youtube.com/watch?v=${feat.trailer}','_blank')">🎬 Trailer</button>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div class="cat-bar">
+   ${["Home","300MB","Bollywood","Hollywood","Dual Audio","South","Web Series","Netflix"].map(c=>`<button class="${cat===c?'active':''}" onclick="setCat('${c}')">${c}</button>`).join('')}
+  </div>
+  <div class="row">
+   <h2>🔥 Trending Now • ${filtered.length} titles</h2>
+   <div class="grid">
+    ${filtered.map(m=>`
+     <div class="card" onclick="selectMovie('${m.id}')">
+      <div class="card-img"><img src="${m.poster}">${m.isNew?'<span class="new">NEW</span>':''}</div>
+      <div class="card-title">${m.title}</div>
+      <div class="card-sub">${m.year} • ${m.size}</div>
+     </div>
+    `).join('')}
+   </div>
+  </div>
+  <div class="row">
+   <h2>🎬 Bollywood</h2>
+   <div class="grid">
+    ${movies.filter(m=>m.cat==="Bollywood").slice(0,12).map(m=>`
+     <div class="card" onclick="selectMovie('${m.id}')"><div class="card-img"><img src="${m.poster}"></div><div class="card-title">${m.title}</div></div>
+    `).join('')}
+   </div>
+  </div>
+  `;
+ } else {
+  const m=selected;
+  html+=`
+  <div class="detail">
+   <div class="detail-hero"><img src="${m.hero}"><button onclick="goHome()" style="position:absolute;top:15px;left:15px;background:rgba(0,0,0,0.7);color:#fff;border:none;padding:8px 14px;border-radius:20px;cursor:pointer">← Back</button></div>
+   <div class="detail-info">
+    <div style="display:flex;gap:15px">
+     <img src="${m.poster}" style="width:90px;aspect-ratio:2/3;object-fit:cover;border-radius:12px;border:1px solid #333">
+     <div><h1 style="font-size:22px;font-weight:900">${m.title}</h1><div style="font-size:12px;color:#888;margin-top:5px">${m.year} • ${m.quality} • ${m.size} • ⭐ ${m.rating}</div></div>
+    </div>
+    <h3 style="margin:20px 0 10px;color:#e50914">Plot</h3><p style="font-size:13px;color:#bbb;line-height:1.6">${m.plot}</p>
+    <h3 style="margin:20px 0 10px;color:#e50914">Screenshots (6)</h3>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">${m.shots.map(s=>`<img src="${s}" style="aspect-ratio:16/9;object-fit:cover;border-radius:8px;border:1px solid #222">`).join('')}</div>
+    <h3 style="margin:20px 0 10px;color:#e50914">Download Links</h3>
+    ${m.downloads.map(d=>`<div style="background:#0a0a0a;border:1px solid #222;padding:12px;border-radius:12px;display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><div><div style="font-weight:700">${d.q}</div><div style="font-size:11px;color:#666">${d.s}</div></div><button onclick="startDownload('${d.q}')" style="background:#e50914;color:#fff;border:none;padding:8px 18px;border-radius:20px;font-weight:700;cursor:pointer">Download</button></div>`).join('')}
+   </div>
+  </div>
+  `;
+ }
+
+ // Admin PIN Modal
+ if(showAdmin && !adminAuth){
+  html+=`<div class="admin-overlay"><div class="admin-box">
+   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px"><h3>🛡️ Admin Access</h3><button onclick="closeAdmin()" style="background:#0a0a0a;border:1px solid #222;width:28px;height:28px;border-radius:50%;color:#fff;cursor:pointer">✕</button></div>
+   <p style="font-size:12px;color:#888;margin-bottom:10px">Enter PIN to manage everything. Default 1234</p>
+   <input id="pinInput" type="password" placeholder="PIN" value="${pin}" style="width:100%;height:44px;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:12px;padding:0 15px;color:#fff;text-align:center;font-weight:800;letter-spacing:0.4em;outline:none">
+   <button onclick="checkPin()" style="margin-top:12px;width:100%;height:44px;background:#e50914;color:#fff;border:none;border-radius:999px;font-weight:800;cursor:pointer">Unlock Admin</button>
+   <div style="font-size:11px;color:#555;text-align:center;margin-top:10px">Everything auto. No public hints.</div>
+  </div></div>`;
+ }
+
+ // Full Admin
+ if(showAdmin && adminAuth){
+  html+=`
+  <div class="admin-main">
+   <div class="admin-header"><div style="font-weight:900"><span style="color:#e50914">MovieHub</span> Admin</div><div style="margin-left:auto;display:flex;gap:8px;align-items:center"><span style="font-size:11px;background:#1a1a1a;border:1px solid #222;padding:4px 10px;border-radius:999px">🟢 Auto Sync ON • Every 6 Hours</span><button onclick="closeAdmin()" style="height:32px;padding:0 14px;border-radius:999px;background:#1a1a1a;border:1px solid #2a2a2a;color:#fff;cursor:pointer">Exit Admin</button></div></div>
+   <div class="admin-layout">
+    <div class="admin-sidebar">
+     ${["Dashboard","Movies","Add Movie","Auto Import","Telegram","Ad & Profit","Settings"].map(t=>`<button class="admin-tab ${adminTab===t?'active':''}" onclick="setAdminTab('${t}')">${t}</button>`).join('')}
+    </div>
+    <div class="admin-content">
+     ${adminTab==="Dashboard"?`
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:20px">
+       <div class="stat"><div style="font-size:11px;color:#888">Earnings Live</div><div style="font-size:24px;font-weight:900;color:#22c55e">$${earnings.toFixed(2)}</div></div>
+       <div class="stat"><div style="font-size:11px;color:#888">Total Downloads</div><div style="font-size:24px;font-weight:900">${downloads}</div></div>
+       <div class="stat"><div style="font-size:11px;color:#888">Ad Clicks</div><div style="font-size:24px;font-weight:900">${clicks}</div></div>
+       <div class="stat"><div style="font-size:11px;color:#888">Total Movies</div><div style="font-size:18px;font-weight:800">${movies.length} Movies</div></div>
+      </div>
+      <div class="stat"><h4 style="margin-bottom:10px">🚀 Auto Sync Status</h4><p style="font-size:13px;color:#888">Last Sync: Just now • Will add 2 new movies with NEW badge every 6 hours</p><button onclick="autoAdd()" style="margin-top:12px;background:#fff;color:#000;border:none;padding:10px 20px;border-radius:999px;font-weight:700;cursor:pointer">Manual Sync Now - Add 2 Movies</button></div>
+     `:''}
+     ${adminTab==="Movies"?`
+      <div style="display:grid;gap:10px">${movies.map(m=>`<div style="background:#1a1a1a;border:1px solid #2a2a2a;padding:10px;border-radius:12px;display:flex;gap:10px;align-items:center"><img src="${m.poster}" style="width:50px;height:70px;object-fit:cover;border-radius:8px"><div style="flex:1"><div style="font-weight:700;font-size:13px">${m.title}</div><div style="font-size:11px;color:#666">${m.year} • ${m.cat} • ${m.views} views</div></div><button onclick="deleteMovie('${m.id}')" style="background:#0a0a0a;border:1px solid #222;color:#fff;padding:6px 12px;border-radius:20px;cursor:pointer">Delete</button></div>`).join('')}</div>
+     `:''}
+     ${adminTab==="Add Movie"?`
+      <div class="stat" style="max-width:500px"><h3 style="margin-bottom:15px">➕ Add New Movie</h3>
+       <input id="newTitle" placeholder="Movie Title" style="width:100%;height:40px;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:10px;padding:0 12px;color:#fff;margin-bottom:10px">
+       <input id="newCat" placeholder="Category (Bollywood/Hollywood/South)" value="Bollywood" style="width:100%;height:40px;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:10px;padding:0 12px;color:#fff;margin-bottom:10px">
+       <input id="newYear" placeholder="Year" value="2025" style="width:100%;height:40px;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:10px;padding:0 12px;color:#fff;margin-bottom:10px">
+       <button onclick="addMovie()" style="width:100%;height:44px;background:#e50914;color:#fff;border:none;border-radius:999px;font-weight:800;cursor:pointer">Add Movie (Auto NEW Badge)</button>
+      </div>
+     `:''}
+     ${adminTab==="Settings"?`
+      <div class="stat" style="max-width:500px"><h3>Site Settings</h3><p style="font-size:12px;color:#888;margin-top:10px">Site Name: MovieHub Pro</p><p style="font-size:12px;color:#888">PIN: 1234 (default)</p><p style="font-size:12px;color:#888;margin-top:10px">Your Live Site: https://rajasinghrajput637-ui.github.io/Moviehub-pro/</p></div>
+     `:''}
+     ${!["Dashboard","Movies","Add Movie","Settings"].includes(adminTab)?`<div class="stat"><h3>${adminTab}</h3><p style="font-size:13px;color:#888;margin-top:10px">This feature is ready in full version. Earnings, Telegram Bot, AdSense codes can be added here.</p></div>`:''}
+    </div>
+   </div>
+  </div>
+  `;
+ }
+
+ html+=`<div style="background:#000;text-align:center;padding:20px;color:#555;font-size:11px;border-top:1px solid #1a1a1a;margin-top:30px">© 2026 MovieHub Pro • Free Movies Download • Admin PIN: 1234</div>`;
+
+ root.innerHTML=html;
+ // bind inputs
+ const sInput=document.getElementById('sInput');
+ if(sInput){ sInput.addEventListener('input',e=>{search=e.target.value; render();}); sInput.focus(); const v=sInput.value; sInput.value=''; sInput.value=v; }
+ const pInput=document.getElementById('pinInput');
+ if(pInput){ pInput.addEventListener('input',e=>{pin=e.target.value}); pInput.addEventListener('keydown',e=>{if(e.key==='Enter')checkPin()}); pInput.focus(); }
+}
+
+function goHome(){selected=null; render(); window.scrollTo(0,0);}
+function setCat(c){cat=c; selected=null; render();}
+function selectMovie(id){selected=movies.find(m=>m.id===id); render(); window.scrollTo(0,0);}
+function openAdmin(){showAdmin=true; render();}
+function closeAdmin(){showAdmin=false; adminAuth=false; pin=""; render();}
+function checkPin(){ if(pin==="1234"){adminAuth=true; render();} else {alert("Wrong PIN! Default is 1234")} }
+function setAdminTab(t){adminTab=t; render();}
+function deleteMovie(id){if(confirm("Delete movie?")){movies=movies.filter(m=>m.id!==id); render();}}
+function addMovie(){
+ const t=document.getElementById('newTitle').value; const c=document.getElementById('newCat').value; const y=document.getElementById('newYear').value;
+ if(!t){alert("Title required");return;}
+ const m=makeMovie(movies.length,true); m.title=t; m.cat=c||"Bollywood"; m.year=y||"2025";
+ movies=[m,...movies]; adminTab="Movies"; render(); alert("Added: "+t);
+}
+function autoAdd(){
+ const n=[makeMovie(movies.length,true),makeMovie(movies.length+1,true)];
+ movies=[...n,...movies].slice(0,60); earnings+=0.5+Math.random(); downloads+=2; render(); alert("2 New Movies Added with NEW badge!");
+}
+function startDownload(q){
+ alert("🔥 Generating Download Link for "+q+"...\n\nIn real site, you can add ad + countdown here!\n\nEarning +$0.80");
+ earnings+=0.8+Math.random()*0.4; downloads++; clicks++; render();
+}
+
+render();
+setInterval(()=>{earnings+=Math.random()*0.02},5000);
+</script>
+<script>(function(){var loc=location.href.replace(/#.*$/,"");var ATTR_NAMES=["data-product-id","data-productid","data-product_id","product-id","productid","product_id","data-source-entity-id","source-entity-id","source_entity_id","data-product","data-metadata","data-meta"];var DATASET_KEYS=["productId","productid","product_id","sourceEntityId","sourceentityid","source_entity_id","product","metadata","meta"];function readProductId(value){if(typeof value!=="string"||value.length===0)return null;if(/^[0-9]{6,}$/.test(value))return value;var match=value.match(/(?:product(?:_|-)?id|source(?:_|-)?entity(?:_|-)?id)["'=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&&node!==document.body;node=node.parentElement){for(var i=0;i<ATTR_NAMES.length;i++){var attrValue=node.getAttribute&&node.getAttribute(ATTR_NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j<DATASET_KEYS.length;j++){var dataValue=dataset[DATASET_KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}function isInlineMediaSlotElement(node){return !!(node&&node.getAttribute&&node.getAttribute("data-clippy-inline-media-slot")!==null)}function findInlineMediaSlot(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&&((node.getAttribute("data-clippy-inline-media-url")||node.getAttribute("data-url")||node.getAttribute("data_url")))||node.href||null}function stripHash(url){return String(url).replace(/#.*$/,"")}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!=="https:")return false;var host=url.hostname.toLowerCase();var supported=host==="instagram.com"||host.endsWith(".instagram.com")||host==="facebook.com"||host.endsWith(".facebook.com");return supported&&/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findDataHref(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(node.getAttribute){var href=node.getAttribute("data-href")||node.getAttribute("data-url");if(href)return{href:href,node:node}}}return null}var nativeOpen=window.open;window.open=function(url){if(parent!==window&&typeof url==="string"&&/^https?:\/\//.test(url)){parent.postMessage({type:"ecto:usercontent-link-click",href:url},"*");return null}return nativeOpen?nativeOpen.apply(window,arguments):null};document.addEventListener("click",function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;if(parent===window)return;var a=target.closest?target.closest("a[href]"):null;if(a&&a.href&&/^https?:\/\//.test(a.href)&&a.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(a,a.href))return;var productId=extractProductId(target)||extractProductId(a);if(productId){e.preventDefault();parent.postMessage({type:"ecto-artifact-link-click",productId:productId},"*");return}e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:a.href},"*");return}var dataHref=findDataHref(target);if(dataHref&&/^https?:\/\//.test(dataHref.href)&&dataHref.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(dataHref.node,dataHref.href))return;e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:dataHref.href},"*")}},true)})();</script><script>(function(){var FOCUS_TYPE="ecto:artifact-focus-request";var CLOSE_TYPE="ecto:artifact-close-request";function focusArtifactDocument(){var body=document.body;if(!body)return;try{window.focus();}catch(e){}if(!body.hasAttribute("tabindex"))body.setAttribute("tabindex","-1");try{body.focus({preventScroll:true});}catch(e){try{body.focus();}catch(e2){}}}window.addEventListener("message",function(event){if(event.source!==window.parent)return;var data=event.data;if(!data||typeof data!=="object"||data.type!==FOCUS_TYPE)return;if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",focusArtifactDocument,{once:true});return;}focusArtifactDocument();});window.addEventListener("keydown",function(event){if(event.key!=="Escape")return;window.setTimeout(function(){if(event.defaultPrevented)return;window.parent.postMessage({type:CLOSE_TYPE},"*");},0);});})();</script></body>
+</html>
